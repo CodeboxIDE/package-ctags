@@ -1,0 +1,27 @@
+{
+    "name": "ctags",
+    "version": "0.0.0",
+    "description": "Ctags listing",
+    "browser": "./src/index.js",
+    "main": "./lib/index.js",
+    "engines": {
+        "codebox": ">=1.0.0"
+    },
+    "dependencies": {
+        "q": "1.x.x",
+        "lodash": "3.x.x || 2.4.x",
+        "ctags": "0.11.0"
+    },
+    "browserify": {
+        "transform": [
+            [
+                "stringify", {
+                    "extensions": [".html"]
+                }
+            ]
+        ]
+    },
+    "packageDependencies": {
+        "project": "CodeboxIDE/package-project"
+    }
+}
