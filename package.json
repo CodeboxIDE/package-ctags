@@ -22,6 +22,7 @@
         ]
     },
     "packageDependencies": {
-        "project": "CodeboxIDE/package-project"
+        "project": "CodeboxIDE/package-project",
+        "statusbar": "CodeboxIDE/package-statusbar"
     }
 }
