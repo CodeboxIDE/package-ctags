@@ -52,7 +52,8 @@ commands.register({
         })
         .then(function(tag) {
             return commands.run("file.open", {
-                'path': tag.get("file")
+                'path': tag.get("file"),
+                'line': 10
             });
         });
     }
@@ -61,7 +62,10 @@ commands.register({
 // CTAGS Autocomplete in the editor
 codebox.editor.autocomplete.add(function(editor, session, pos, prefix) {
     prefix = prefix.toLowerCase();
-    return _.chain(tags || [])
+
+    return getTags()
+    .then(function(_tags) {
+        return _.chain(_tags)
         .filter(function(tag) {
             return tag.name.toLowerCase().search(prefix) >= 0;
         })
@@ -74,6 +78,7 @@ codebox.editor.autocomplete.add(function(editor, session, pos, prefix) {
             };
         })
         .value();
+    });
 });
 
 
