@@ -2,6 +2,7 @@ require("./stylesheets/main.less");
 var tagTemplate = require("./templates/tag.html");
 
 var Q = codebox.require("q");
+var _ = codebox.require("hr.utils");
 var commands = codebox.require("core/commands");
 var rpc = codebox.require("core/rpc");
 var dialogs = codebox.require("utils/dialogs");
@@ -57,6 +58,25 @@ commands.register({
     }
 });
 
+// CTAGS Autocomplete in the editor
+codebox.editor.autocomplete.add(function(editor, session, pos, prefix) {
+    prefix = prefix.toLowerCase();
+    return _.chain(tags || [])
+        .filter(function(tag) {
+            return tag.name.toLowerCase().search(prefix) >= 0;
+        })
+        .map(function(tag) {
+            return {
+                'name': tag.name,
+                'value': tag.name,
+                'score': 0,
+                'meta': tag.kind || ""
+            };
+        })
+        .value();
+});
+
+
 // Menu
 if (codebox.menubar) {
     codebox.menubar.createMenu("tools", {
@@ -73,3 +93,4 @@ if (codebox.menubar) {
         ]
     })
 }
+
