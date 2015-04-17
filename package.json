@@ -10,7 +10,17 @@
     "dependencies": {
         "q": "1.x.x",
         "lodash": "3.x.x || 2.4.x",
-        "ctags": "0.11.0"
+        "ctags": "0.11.0",
+        "stringify": "3.1.0"
+    },
+    "browserify": {
+        "transform": [
+            [
+                "stringify", {
+                    "extensions": [".md", ".html"]
+                }
+            ]
+        ]
     },
     "packageDependencies": {
         "editor": "CodeboxIDE/package-editor",
