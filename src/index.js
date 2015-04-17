@@ -1,5 +1,6 @@
 require("./stylesheets/main.less");
 var tagTemplate = require("./templates/tag.html");
+var settings = require("./settings");
 
 var Q = codebox.require("q");
 var _ = codebox.require("hr.utils");
@@ -60,7 +61,9 @@ commands.register({
 });
 
 // CTAGS Autocomplete in the editor
-codebox.editor.autocomplete.add(function(editor, session, pos, prefix) {
+codebox.editor.autocomplete.add(function(editor, pos, prefix) {
+    if (!settings.data.get("autocompletion")) return [];
+
     prefix = prefix.toLowerCase();
 
     return getTags()
