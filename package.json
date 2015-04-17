@@ -12,15 +12,6 @@
         "lodash": "3.x.x || 2.4.x",
         "ctags": "0.11.0"
     },
-    "browserify": {
-        "transform": [
-            [
-                "stringify", {
-                    "extensions": [".html"]
-                }
-            ]
-        ]
-    },
     "packageDependencies": {
         "editor": "CodeboxIDE/package-editor",
         "project": "CodeboxIDE/package-project",
