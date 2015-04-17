@@ -9,9 +9,12 @@ var rpc = codebox.require("core/rpc");
 var dialogs = codebox.require("utils/dialogs");
 
 var tags = undefined;
+var tagsP;
 
 function updateTags() {
-    return codebox.statusbar.loading(
+    if (tagsP) return tagsP;
+
+    tagsP = codebox.statusbar.loading(
         rpc.execute("ctags/list"),
         {
             prefix: "Updating ctags"
@@ -20,7 +23,12 @@ function updateTags() {
     .then(function(_tags) {
         tags = _tags;
         return tags;
+    })
+    .fin(function() {
+        tagsP = null;
     });
+
+    return tagsP;
 }
 
 function getTags() {
